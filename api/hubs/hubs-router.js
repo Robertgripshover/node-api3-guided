@@ -1,5 +1,7 @@
 const express = require('express');
 
+const { checkHubIdExists } = require('./hubs-middleware')
+
 const Hubs = require('./hubs-model.js');
 const Messages = require('../messages/messages-model.js');
 
@@ -75,7 +77,7 @@ router.post('/:id/messages', (req, res, next) => {
     .catch(next);
 });
 
-router.use((error, req, res, next) => {
+router.use((error, req, res, next) => { // eslint-disable-line
   res.status(error.status || 500).json({
     message: error.message,
     customMessage: 'Something bad happend inside the hubs router'
