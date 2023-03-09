@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { checkHubIdExists } = require('./hubs-middleware')
+const { checkHubIdExists, checkNewHub } = require('./hubs-middleware')
 
 const Hubs = require('./hubs-model.js');
 const Messages = require('../messages/messages-model.js');

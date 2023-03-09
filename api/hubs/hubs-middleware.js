@@ -14,6 +14,20 @@ async function checkHubIdExists(req, res, next) {
     }
 }
 
+
+function checkNewHub(req, res, next) {
+    const {name} = req.body;
+    if (
+        name !== undefined &&
+        typeof name === 'string' &&
+        name.length
+        ) {
+        next();
+    }
+}
+
+
 module.exports = {
     checkHubIdExists,
+    checkNewHub,
 };
