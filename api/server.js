@@ -1,10 +1,36 @@
 const express = require('express'); // importing a CommonJS module
 
+const morgan = require('morgan');
+
 const hubsRouter = require('./hubs/hubs-router.js');
 
 const server = express();
 
+function customMorgan(req, res, next) {
+  console.log(`you made a ${req.method} request`);
+  next();
+}
+
+function shortCircuit(req, res, next) {
+  res.json('the request was short circuted');
+}
+
+
+function addFreind(req, res, next) {
+  req.freind = 'Our Lady of Good Councel';
+}
+
 server.use(express.json());
+
+server.use(morgan('dev'));
+
+server.use(customMorgan);
+
+
+// server.use(shortCircuit);
+
+server.use(addFreind);
+
 
 server.use('/api/hubs', hubsRouter);
 

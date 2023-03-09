@@ -117,4 +117,11 @@ router.post('/:id/messages', (req, res) => {
     });
 });
 
+router.use((error, req, res, next) => {
+  res.status(error.status || 500).json({
+    message: error.message,
+    customMessage: 'Something bad happend inside the hubs router'
+  });
+});
+
 module.exports = router;
